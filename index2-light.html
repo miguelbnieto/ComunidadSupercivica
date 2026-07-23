@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comunidad Supercívica - Alternativa 2 (Light)</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --card: #f6f7f8;
+      --card-soft: #f2f4f6;
+      --text: #111111;
+      --muted: rgba(17,17,17,0.65);
+      --title: #d31c20;
+      --button: #00704a;
+      --button-soft: rgba(0,112,74,0.10);
+      --button-border: rgba(0,112,74,0.18);
+      --border: rgba(16,24,32,0.06);
+      --radius: 28px;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 1rem;
+    }
+
+    .page { max-width: 1180px; margin: 0 auto; padding: 40px 22px 70px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; margin-bottom: 36px; }
+    .brand { display: inline-flex; align-items: center; gap: 16px; text-decoration: none; }
+    .brand .logo-img { width: 240px; max-width: 100%; height: auto; display: block; }
+    .logo { font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text); font-size: 0.96rem; }
+    .nav { display: flex; gap: 18px; flex-wrap: wrap; }
+    .nav a { color: var(--text); text-decoration: none; font-weight: 700; }
+    .nav a:hover { color: var(--button); }
+    .hero { display: grid; gap: 20px; align-items: center; grid-template-columns: 1.1fr 0.9fr; }
+    .hero h1 { margin: 0; font-size: clamp(3rem, 4vw, 5.2rem); line-height: 0.95; letter-spacing: -0.04em; color: var(--title); }
+    .hero p { margin: 14px 0 0; max-width: 600px; color: var(--text); font-size: 1.12rem; }
+    .hero-links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 28px; }
+    .button, .secondary { border-radius: 999px; padding: 15px 28px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; transition: transform .12s ease, box-shadow .12s ease; }
+    .button { background: linear-gradient(180deg, var(--button), #006b43); color: #fff; box-shadow: 0 8px 18px rgba(0,112,74,0.12); border: 1px solid var(--button-border); }
+    .secondary { background: var(--button-soft); color: #fff; border: 1px solid var(--button-border); }
+    .button:hover, .secondary:hover { transform: translateY(-2px); box-shadow: 0 12px 22px rgba(0,112,74,0.14); }
+    .hero-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 36px; box-shadow: 0 6px 24px rgba(16,24,32,0.06); }
+    .hero-card h2 { margin: 0 0 10px; font-size: 1.55rem; color: var(--title); }
+    .hero-card p { margin: 0; color: var(--text); }
+    .hero-card strong { color: var(--text); }
+
+    .support-lines { display: grid; gap: 12px; margin-top: 24px; }
+    .support-line { background: var(--card-soft); border: 1px solid var(--border); border-radius: 18px; padding: 14px 18px; color: var(--text); }
+    .support-line strong { color: var(--title); }
+
+    .message-card { background: linear-gradient(180deg, var(--card) 0%, var(--card-soft) 100%); border: 1px solid var(--border); border-radius: 10px; padding: 20px; box-shadow: 0 6px 12px rgba(16,24,32,0.06); }
+    .message-card p { margin: 0 0 14px; color: var(--text); }
+    .message-card p:last-child { margin-bottom: 0; }
+    .message-card strong { color: #111111; }
+
+    .section { margin-top: 56px; }
+    .section h2 { font-size: clamp(2rem, 2.4vw, 2.8rem); margin-bottom: 24px; color: var(--title); }
+    .section p { max-width: 760px; color: var(--text); font-size: 1.08rem; }
+
+    .grid-3 { display: grid; gap: 12px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 28px; }
+    .feature { background: var(--card-soft); border: 1px solid var(--border); border-radius: 28px; padding: 28px; }
+    .feature h3 { margin: 0 0 16px; font-size: 1.3rem; color: var(--title); }
+    .feature p { margin: 0; color: var(--text); }
+
+    .pricing { display: grid; gap: 10px; grid-template-columns: repeat(1, minmax(0, 1fr)); margin-top: 20px; }
+    .plan { border-radius: 30px; overflow: hidden; position: relative; background: linear-gradient(180deg, rgba(63,179,97,0.04) 0%, rgba(246,247,248,1) 100%); border: 1px solid var(--border); }
+    .plan::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at top, rgba(0,112,74,0.06), transparent 40%); pointer-events: none; }
+    .plan-content { position: relative; padding: 34px 28px; }
+    .plan h3 { margin: 0 0 12px; font-size: 1.55rem; color: var(--title); }
+    .plan .price { margin: 0; font-size: 1.47rem; font-weight: 800; color: var(--button); }
+    .plan p { margin-top: 14px; color: var(--text); font-size: 1rem; }
+    .plan ul { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 12px; }
+    .plan li { display: flex; gap: 12px; align-items: flex-start; color: var(--text); font-size: 1rem; }
+    .plan li::before { content: '•'; color: var(--button); font-weight: 900; }
+    .plan .cta { display: inline-block; margin-top: 24px; padding: 16px 22px; border-radius: 999px; background: var(--button); color: #fff; text-decoration: none; font-weight: 700; }
+
+    .quote { background: var(--card); border: 1px solid var(--border); border-radius: 26px; padding: 32px; margin-top: 40px; }
+    .quote p { margin: 0; color: var(--text); font-size: 1.15rem; }
+
+    .faq { display: grid; gap: 20px; margin-top: 28px; }
+    .faq-item { background: var(--card-soft); border: 1px solid var(--border); border-radius: 24px; padding: 24px; }
+    .faq-item dt { font-weight: 700; color: var(--title); margin-bottom: 10px; }
+    .faq-item dd { margin: 0; color: var(--text); font-size: 1rem; }
+
+    footer { margin-top: 56px; text-align: center; color: var(--text); font-size: 0.95rem; }
+
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .stats, .grid-3, .pricing { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="brand" href="#">
+        <img class="logo-img" src="Logo/logo-supercivicos.png" alt="Supercívicos logo" />
+      </a>
+      <nav class="nav">
+        <a href="#impacto">Impacto</a>
+        <a href="#planes">Planes</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+
+    <section class="hero">
+      <div>
+        <h1>Apoyando impacto ciudadano, no solo contenido.</h1>
+        <p>Se parte de esta comunidad con un proyecto ciudadano independiente, transparente y medible.</p>
+        <div class="hero-links">
+          <a class="button" href="#planes">Ver planes</a>
+          <a class="button" href="#impacto">Descubrir impacto</a>
+        </div>
+        <div class="support-lines">
+          <div class="support-line"><strong>Una comunidad</strong><br>Apoya un proyecto ciudadano independiente.</div>
+          <div class="support-line"><strong>Tres niveles</strong><br>Alianza, Brigada y Círculo para distintos grados de participación.</div>
+          <div class="support-line"><strong>Más que una membresía</strong><br>Serás parte de una comunidad que ofrece respaldo directo para documentar, denunciar y mejorar la vida cotidiana.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="message-card">
+        <h2 style="margin: 0 0 20px; color: var(--title);">¿De qué se trata?</h2>
+        <p><Hace años empezamos <strong>SUPERCÍVICOS</strong> con una <strong>IDEA</strong> muy simple:</p>
+        <p>Que los ciudadanos merecemos mejores ciudades y mejores gobiernos, y para lograr esto <strong>HAY QUE ROMPER LA APATÍA</strong>.</p>
+        <p>Desde entonces hemos denunciado corrupción, abusos, negligencia y cientos de historias que muchas veces <strong>NADIE MÁS SE ATREVE</strong> a documentar, y menos a dar un seguimiento.</p>
+        <p>Pero hacer esto de forma <strong>INDEPENDIENTE</strong> tiene un costo.</p>
+        <p>Y queremos decirlo <strong>CLARAMENTE</strong>:</p>
+        <p><strong>NO QUEREMOS DEPENDER DE INTERESES QUE CONDICIONEN LO QUE PODEMOS DECIR Y LO QUE NO</strong>.</p>
+        <p>Queremos depender de <strong>CIUDADANOS</strong> como <strong>TÚ</strong> que se sienten representados por el movimiento <strong>SUPERCÍVICO</strong>.</p>
+        <p>Por eso nace <strong>COMUNIDAD SUPERCÍVICA</strong>.</p>
+        <p>No es una campaña de <strong>DONATIVOS</strong>.</p>
+        <p>No es un <strong>FAVOR</strong>.</p>
+        <p>Es una manera de construir juntos un medio ciudadano <strong>INDEPENDIENTE</strong> que te representa.</p>
+        <p><strong>COMUNIDAD SUPERCÍVICA</strong>.</p>
+        <p>Con una aportación mensual de la Comunidad Supercívica podemos fortalecer la capacidad del movimiento de seguir investigando, denunciando e incidiendo: incomodar al poder cuando es necesario y siempre defendiendo a los ciudadanos.</p>
+        <p>Si alguna vez un video de <strong>SUPERCÍVICOS</strong> te informó, te hizo reflexionar o te ayudó a exigir un trato digno, <strong>TE INVITAMOS A FORMAR PARTE</strong>.</p>
+        <p>Porque <strong>SUPERCÍVICOS</strong> no debe pertenecer a ningún político ni a ningún patrocinador.</p>
+        <p>Debe pertenecer a la <strong>COMUNIDAD</strong> que lo hace posible.</p>
+        <p>Si quieres <strong>SUMARTE</strong>, aquí abajo encontrarás toda la información.</p>
+        <p><strong>GRACIAS</strong> por acompañarnos todos estos años.</p>
+        <p>Lo <strong>MEJOR</strong> todavía está por venir.</p>
+      </div>
+    </section>
+
+    <section id="impacto" class="section">
+      <h2>¿Por qué crear la Comunidad Supercívica?</h2>
+      <p>Muchos problemas ciudadanos se normalizan hasta que alguien los documenta y registra el impacto que tienen en los menos representados: los peatones, los usuarios del transporte público, los arbolitos de la ciudad, entre otros. Esta comunidad fortalece el trabajo con mayor libertad, mejor planeación y mayor capacidad de respuesta.</p>
+      <div class="grid-3">
+        <div class="feature"><h3>Visibilizar abusos</h3><p>Exponer negligencias y situaciones que no llegan a la agenda pública.</p></div>
+        <div class="feature"><h3>Presionar con datos</h3><p>Transformar testimonios aislados en evidencia ciudadana que genera impacto.</p></div>
+        <div class="feature"><h3>Libre e independiente</h3><p>Respaldar la acción cívica ciudadana sin depender únicamente de algoritmos o marcas.</p></div>
+      </div>
+    </section>
+
+    <section id="planes" class="section">
+      <h2>Elige tu nivel de participación</h2>
+      <div class="pricing">
+        <article class="plan">
+          <div class="plan-content">
+            <h3>Alianza Supercívica</h3>
+            <p class="price">$49 pesos al mes</p>
+            <p>Apoya el trabajo independiente y recibe acceso anticipado, encuestas y reportes trimestrales.</p>
+            <ul>
+              <li>Acceso a Reporte de impacto</li>
+              <li>Actualizaciones exclusivas</li>
+              <li>Acceso a un evento en vivo al año </li>
+            </ul>
+            <a class="cta" href="https://mpago.la/2iL3vV6">Unirme a la Alianza</a>
+          </div>
+        </article>
+        <article class="plan">
+          <div class="plan-content">
+            <h3>Brigada Supercívica</h3>
+            <p class="price">$99 pesos al mes</p>
+            <p>Participa más de cerca con sesiones en vivo y consultas especiales para impulsar la agenda ciudadana.</p>
+            <ul>
+              <li>Todos los beneficios de la Alianza</li>
+              <li>Priorización de los casos denunciados</li>
+              <li>Sesión trimestral en vivo vía livestreaming</li>
+              <li>Consultas y conversaciones especiales</li>
+            </ul>
+            <a class="cta" href="https://mpago.la/1MNnmSs">Unirme a la Brigada</a>
+          </div>
+        </article>
+         <article class="plan">
+          <div class="plan-content">
+            <h3>Círculo Supercívico</h3>
+            <p class="price">$999 pesos al mes</p>
+            <p>Participa más de cerca con sesiones en vivo y consultas especiales para impulsar la agenda ciudadana.</p>
+            <ul>
+              <li>Todos los beneficios de la Brigada</li>
+              <li>Un artículo de regalo del catalogo de la linea de la Comunidad Supercívica (¡por venir!)</li>
+              <li>Sesión mensual en vivo vía livestreaming</li>
+              
+            </ul>
+            <a class="cta" href="https://mpago.la/1ZJR3Nf">Unirme al Círculo</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Impacto medible y rendición de cuentas</h2>
+      <div class="quote"><p>Cada trimestre se publicará un Reporte de Impacto. Cada año, se presentará un Informe Anual para mostrar avances, cifras y prioridades a atender.</p></div>
+      <div class="grid-3" style="margin-top: 32px;">
+        <div class="feature"><h3>Contenidos producidos</h3><p>Casos documentados, denuncias visualizadas y temas empujados al debate público.</p></div>
+        <div class="feature"><h3>Denuncias atendidas</h3><p>Mayor capacidad para investigar, verificar y amplificar problemas ciudadanos, buscando su resolución.</p></div>
+        <div class="feature"><h3>Resultados visibles</h3><p>Un reporte que captura qué se hizo con el respaldo de la comunidad.</p></div>
+      </div>
+    </section>
+
+    <section id="faq" class="section">
+      <h2>Preguntas frecuentes</h2>
+      <div class="faq">
+        <div class="faq-item"><dt>¿Esto es una donación?</dt><dd>No exactamente. Es una membresía de participación ciudadana con beneficios y reportes que sustentan el trabajo facilitado a través de la misma.</dd></div>
+        <div class="faq-item"><dt>¿Puedo cancelar cuando quiera?</dt><dd>Sí. La membresía puede cancelarse en cualquier momento.</dd></div>
+        <div class="faq-item"><dt>¿Los reportes serán públicos?</dt><dd>Los reportes trimestrales estarán disponibles para miembros y el Reporte Anual podrá usarse como documento público.</dd></div>
+        <div class="faq-item"><dt>¿Mi participación influye en los temas?</dt><dd>Sí, mediante encuestas y consultas especiales, la comunidad aporta señales sobre prioridades ciudadanas.</dd></div>
+      </div>
+    </section>
+
+    <footer>
+      <p>La Comunidad Supercívica no financia entretenimiento: financia impacto ciudadano independiente, medible y respaldado directamente por la gente.</p>
+    </footer>
+  </main>
+</body>
+</html>

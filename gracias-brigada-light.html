@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pago aprobado | ¡Gracias por unirte a la Brigada!</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --card: #f6f7f8;
+      --card-soft: #f2f4f6;
+      --text: #111111;
+      --muted: rgba(17, 17, 17, 0.65);
+      --title: #d31c20;
+      --button: #3fb361;
+      --button-soft: rgba(63, 179, 97, 0.10);
+      --button-border: rgba(63, 179, 97, 0.18);
+      --border: rgba(16, 24, 32, 0.06);
+      --radius: 28px;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 1rem;
+    }
+
+    .page { max-width: 1080px; margin: 0 auto; padding: 40px 22px 70px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; margin-bottom: 36px; }
+    .brand { display: inline-flex; align-items: center; gap: 16px; text-decoration: none; }
+    .brand .logo-img { width: 240px; max-width: 100%; height: auto; display: block; }
+    .nav { display: flex; gap: 18px; flex-wrap: wrap; }
+    .nav a { color: var(--text); text-decoration: none; font-weight: 700; }
+    .nav a:hover { color: var(--button); }
+
+    .main-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 44px 36px; box-shadow: 0 6px 24px rgba(16, 24, 32, 0.06); }
+    .badge { display: inline-flex; align-items: center; gap: 12px; color: var(--button); font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 24px; }
+    .badge span { width: 10px; height: 10px; border-radius: 999px; background: var(--button); }
+    .hero-title { margin: 0; font-size: clamp(2.8rem, 4vw, 4.8rem); line-height: 0.95; letter-spacing: -0.05em; color: var(--title); text-align: center; }
+    .hero-copy { margin: 24px auto 0; max-width: 680px; color: var(--muted); font-size: 1.12rem; text-align: center; }
+    .hero-copy strong { color: var(--text); }
+
+    .status-pill { display: inline-flex; align-items: center; gap: 10px; margin-top: 30px; padding: 14px 20px; border-radius: 999px; background: var(--button-soft); color: var(--button); font-weight: 700; border: 1px solid var(--button-border); }
+    .status-pill::before { content: '✓'; font-size: 1.1rem; }
+
+    .grid-2 { display: grid; gap: 22px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 42px; }
+    .summary-card { background: var(--card-soft); border: 1px solid var(--border); border-radius: 26px; padding: 28px; }
+    .summary-card h3 { margin: 0 0 16px; font-size: 1.4rem; color: var(--title); }
+    .summary-card p { margin: 0; color: var(--text); font-size: 1rem; line-height: 1.7; }
+    .summary-card ul { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 12px; }
+    .summary-card li { display: flex; gap: 12px; align-items: flex-start; color: var(--text); }
+    .summary-card li::before { content: '•'; color: var(--button); font-weight: 900; line-height: 1; }
+
+    .button { display: inline-flex; align-items: center; justify-content: center; padding: 16px 28px; border-radius: 999px; background: linear-gradient(180deg, var(--button), #2ca458); color: #fff; text-decoration: none; font-weight: 700; box-shadow: 0 8px 18px rgba(63,179,97,0.12); border: 1px solid var(--button-border); margin-top: 32px; transition: transform .12s ease, box-shadow .12s ease; }
+    .button-secondary { display: inline-flex; align-items: center; justify-content: center; padding: 16px 28px; border-radius: 999px; border: 1px solid var(--button-border); background: var(--button-soft); color: var(--button); text-decoration: none; font-weight: 700; margin-top: 16px; }
+    .button:hover, .button-secondary:hover { transform: translateY(-2px); box-shadow: 0 12px 22px rgba(63,179,97,0.14); }
+
+    .notes { margin-top: 42px; display: grid; gap: 18px; }
+    .note { background: var(--card-soft); border: 1px solid var(--border); border-radius: 24px; padding: 24px; }
+    .note h4 { margin: 0 0 10px; font-size: 1.12rem; color: var(--title); }
+    .note p { margin: 0; color: var(--text); font-size: 1rem; }
+
+    footer { margin-top: 56px; text-align: center; color: var(--muted); font-size: 0.95rem; }
+
+    @media (max-width: 860px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="brand" href="index2-light.html">
+        <svg class="logo-img" viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="logoTitle logoDesc">
+          <title id="logoTitle">Supercívica Logo</title>
+          <desc id="logoDesc">Logo con barra verde, texto rojo y oscuro sobre fondo claro</desc>
+          <rect x="0" y="0" width="700" height="14" fill="#3fb361" />
+          <text x="16" y="88" font-family="Inter, system-ui, sans-serif" font-size="66" font-weight="800" fill="#d31c20" letter-spacing="0.14em">LOS</text>
+          <text x="196" y="88" font-family="Inter, system-ui, sans-serif" font-size="66" font-weight="800" fill="#111111" letter-spacing="0.14em">SUPER</text>
+          <text x="444" y="88" font-family="Inter, system-ui, sans-serif" font-size="66" font-weight="800" fill="#d31c20" letter-spacing="0.14em">CÍVICOS</text>
+        </svg>
+      </a>
+      <nav class="nav">
+        <a href="index2-light.html">Inicio</a>
+        <a href="#details">Detalles</a>
+      </nav>
+    </div>
+
+    <section class="main-card">
+      <div class="badge"><span></span>Pago aprobado</div>
+      <h1 class="hero-title">Gracias por unirte a la Brigada Supercívica.</h1>
+      <p class="hero-copy">Como parte de la Brigada Supercívica participas más de cerca en las decisiones, las prioridades y la dirección del proyecto.</p>
+      <div class="status-pill">Suscripción activa</div>
+
+      <div id="details" class="grid-2">
+        <article class="summary-card">
+          <h3>Lo que representa tu aportación</h3>
+          <p>Tu apoyo de Brigadista significa más conversación directa, más participación en decisiones, y más capacidad para impulsar temas ciudadanos con fuerza y claridad.</p>
+          <ul>
+            <li>Acceso anticipado a contenidos</li>
+            <li>Reporte trimestral de impacto</li>
+            <li>Participación en encuestas</li>
+            <li>Sesión mensual en vivo con El Supercívico</li>
+          </ul>
+        </article>
+
+        <article class="summary-card">
+          <h3>Próximos pasos</h3>
+          <p>Pronto recibirás información sobre la primera sesión en vivo y las consultas especiales de la comunidad. También tendrás acceso directo a actualizaciones exclusivas.</p>
+          <ul>
+            <li>Verifica tu correo para confirmación</li>
+            <li>Recibe la invitación a la sesión mensual</li>
+            <li>Participa en la próxima consulta especial</li>
+            <li>Comparte tu apoyo con otras personas</li>
+          </ul>
+        </article>
+      </div>
+
+      <a class="button" href="index2-light.html">Volver a la comunidad</a>
+      <a class="button-secondary" href="index2-light.html#faq">Ver preguntas frecuentes</a>
+
+      <div class="notes">
+        <div class="note">
+          <h4>Un lugar más cercano al impacto</h4>
+          <p>La Brigada no solo sostiene el contenido: ayuda a definir la agenda y a llevar las decisiones ciudadanas hacia adelante.</p>
+        </div>
+        <div class="note">
+          <h4>Tu voz es parte del proyecto</h4>
+          <p>Con tu aporte recibes herramientas de participación, transparencia en el uso de recursos y un rol activo en el seguimiento del trabajo.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Bienvenido a la Brigada Supercívica. Gracias por ser parte de un respaldo ciudadano más profundo y comprometido.</p>
+    </footer>
+  </main>
+</body>
+</html>
